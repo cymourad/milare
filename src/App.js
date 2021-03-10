@@ -17,21 +17,27 @@ import AvailableGraphs from "./pages/AvailableGraphs";
 import NotFound from "./pages/NotFound";
 
 function App() {
-	const [userProfile, setUserProfile] = useState({
+	const loggedOutPorfile = {
 		username: "",
 		isAdmin: false,
 		isDoctor: false,
 		isTranslator: false,
-	});
+	};
+
+	const [userProfile, setUserProfile] = useState(loggedOutPorfile);
 
 	const isLoggedIn = () => {
 		return userProfile.username != "";
 	};
 
+	const logout = () => {
+		setUserProfile(loggedOutPorfile);
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>
-				<Navbar />
+				<Navbar isLoggedIn={isLoggedIn()} logout={logout} />
 				<Switch>
 					<Route exact path={FRONT_END_ROUTE.HOME} component={Home} />
 					<Route exact path={FRONT_END_ROUTE.LOGIN}>

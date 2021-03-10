@@ -22,28 +22,41 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Navbar = ({ userProfile }) => {
+const Navbar = ({ isLoggedIn, logout }) => {
 	const classes = useStyles();
 
 	return (
 		<div className={classes.root}>
 			<AppBar position="static">
 				<Toolbar>
-					<Typography variant="h6" className={classes.title}>
-						Milare
-					</Typography>
 					<Link
-						to={FRONT_END_ROUTE.AVAILABLE_GRAPHS}
+						to={FRONT_END_ROUTE.HOME}
 						style={{ textDecoration: "none", color: "white" }}
+						className={classes.title}
 					>
-						<Button>Graph Menu</Button>
+						<Typography variant="h6">Milare</Typography>
 					</Link>
-					<Link
-						to={FRONT_END_ROUTE.LOGIN}
-						style={{ textDecoration: "none", color: "white" }}
-					>
-						<Button color="inherit">Login</Button>
-					</Link>
+
+					{isLoggedIn ? (
+						<>
+							<Link
+								to={FRONT_END_ROUTE.AVAILABLE_GRAPHS}
+								style={{ textDecoration: "none", color: "white" }}
+							>
+								<Button>Graph Menu</Button>
+							</Link>
+							<Button color="inherit" onClick={() => logout()}>
+								Logout
+							</Button>
+						</>
+					) : (
+						<Link
+							to={FRONT_END_ROUTE.LOGIN}
+							style={{ textDecoration: "none", color: "white" }}
+						>
+							<Button color="inherit">Login</Button>
+						</Link>
+					)}
 				</Toolbar>
 			</AppBar>
 		</div>
