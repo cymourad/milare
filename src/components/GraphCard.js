@@ -61,12 +61,9 @@ const GraphCard = ({ title, tags, imageURL, summary, editGraphMetaData }) => {
 						"/" +
 						title.toLowerCase().split(" ").join("-")
 					}
+					style={{ textDecoration: "none" }}
 				>
-					<Button
-						size="small"
-						color="primary"
-						style={{ textDecoration: "none" }}
-					>
+					<Button size="small" color="primary">
 						Edit Graph
 					</Button>
 				</Link>

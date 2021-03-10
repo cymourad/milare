@@ -37,12 +37,12 @@ function App() {
 					<Route exact path={FRONT_END_ROUTE.LOGIN}>
 						<LogIn setUserProfile={setUserProfile} userProfile={userProfile} />
 					</Route>
-					<Route exact path={FRONT_END_ROUTE.AVAILABLE_GRAPHS}>
+					{/* <Route exact path={FRONT_END_ROUTE.AVAILABLE_GRAPHS}>
 						<AvailableGraphs
 							canAddGraph={userProfile.isAdmin || userProfile.isDoctor}
 						/>
-					</Route>
-					{/* <Route exact path={FRONT_END_ROUTE.AVAILABLE_GRAPHS}>
+					</Route> */}
+					<Route exact path={FRONT_END_ROUTE.AVAILABLE_GRAPHS}>
 						{isLoggedIn() ? (
 							<AvailableGraphs
 								canAddGraph={userProfile.isAdmin || userProfile.isDoctor}
@@ -50,7 +50,7 @@ function App() {
 						) : (
 							<Redirect to={FRONT_END_ROUTE.LOGIN} />
 						)}
-					</Route> */}
+					</Route>
 					{/* <Route path={FRONT_END_ROUTE.GRAPH + "/:title"}>
 					{isLoggedIn() ? <Graph
 						canEdit={userProfile.isDoctor}
