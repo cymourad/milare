@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/milare/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/milare/static/js/main.0d835ac5.chunk.js",
-    "main.js.map": "/milare/static/js/main.0d835ac5.chunk.js.map",
+    "main.js": "/milare/static/js/main.d9f56b41.chunk.js",
+    "main.js.map": "/milare/static/js/main.d9f56b41.chunk.js.map",
     "runtime-main.js": "/milare/static/js/runtime-main.1eb2cebc.js",
     "runtime-main.js.map": "/milare/static/js/runtime-main.1eb2cebc.js.map",
-    "static/js/2.c8598497.chunk.js": "/milare/static/js/2.c8598497.chunk.js",
-    "static/js/2.c8598497.chunk.js.map": "/milare/static/js/2.c8598497.chunk.js.map",
+    "static/js/2.045c0f42.chunk.js": "/milare/static/js/2.045c0f42.chunk.js",
+    "static/js/2.045c0f42.chunk.js.map": "/milare/static/js/2.045c0f42.chunk.js.map",
     "static/js/3.538ffdba.chunk.js": "/milare/static/js/3.538ffdba.chunk.js",
     "static/js/3.538ffdba.chunk.js.map": "/milare/static/js/3.538ffdba.chunk.js.map",
     "index.html": "/milare/index.html",
     "static/css/main.6dea0f05.chunk.css.map": "/milare/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.c8598497.chunk.js.LICENSE.txt": "/milare/static/js/2.c8598497.chunk.js.LICENSE.txt"
+    "static/js/2.045c0f42.chunk.js.LICENSE.txt": "/milare/static/js/2.045c0f42.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1eb2cebc.js",
-    "static/js/2.c8598497.chunk.js",
+    "static/js/2.045c0f42.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.0d835ac5.chunk.js"
+    "static/js/main.d9f56b41.chunk.js"
   ]
 }
