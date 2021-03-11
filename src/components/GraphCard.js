@@ -29,7 +29,14 @@ const useStyles = makeStyles({
 	},
 });
 
-const GraphCard = ({ title, tags, imageURL, summary, editGraphMetaData }) => {
+const GraphCard = ({
+	id,
+	title,
+	tags,
+	imageURL,
+	summary,
+	editGraphMetaData,
+}) => {
 	const classes = useStyles();
 
 	return (
@@ -56,11 +63,13 @@ const GraphCard = ({ title, tags, imageURL, summary, editGraphMetaData }) => {
 			</CardActionArea>
 			<CardActions>
 				<Link
-					to={
-						FRONT_END_ROUTE.GRAPH +
-						"/" +
-						title.toLowerCase().split(" ").join("-")
-					}
+					to={{
+						pathname:
+							FRONT_END_ROUTE.GRAPH +
+							"/" +
+							title.toLowerCase().split(" ").join("-"),
+						state: { id },
+					}}
 					style={{ textDecoration: "none" }}
 				>
 					<Button size="small" color="primary">

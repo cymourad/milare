@@ -14,6 +14,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import AvailableGraphs from "./pages/AvailableGraphs";
+import Graph from "./pages/Graph";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -47,6 +48,12 @@ function App() {
 						<AvailableGraphs
 							canAddGraph={userProfile.isAdmin || userProfile.isDoctor}
 						/>
+					</Route>
+					<Route path={FRONT_END_ROUTE.GRAPH + "/:title"}>
+						<Graph
+							canEdit={userProfile.isDoctor || userProfile.isAdmin}
+							canTranslate={userProfile.isTranslator || userProfile.isAdmin}
+						/>
 					</Route> */}
 					<Route exact path={FRONT_END_ROUTE.AVAILABLE_GRAPHS}>
 						{isLoggedIn() ? (
@@ -57,14 +64,16 @@ function App() {
 							<Redirect to={FRONT_END_ROUTE.LOGIN} />
 						)}
 					</Route>
-					{/* <Route path={FRONT_END_ROUTE.GRAPH + "/:title"}>
-					{isLoggedIn() ? <Graph
-						canEdit={userProfile.isDoctor}
-						canTranslate={userProfile.isTranslator}
-						isAdmin={userProfile.isAdmin}
-						id={}
-					/> : <Redirect to={FRONT_END_ROUTE.LOGIN} />}
-				</Route> */}
+					<Route path={FRONT_END_ROUTE.GRAPH + "/:title"}>
+						{isLoggedIn() ? (
+							<Graph
+								canEdit={userProfile.isDoctor || userProfile.isAdmin}
+								canTranslate={userProfile.isTranslator || userProfile.isAdmin}
+							/>
+						) : (
+							<Redirect to={FRONT_END_ROUTE.LOGIN} />
+						)}
+					</Route>
 					<Route component={NotFound} />
 				</Switch>
 			</Router>

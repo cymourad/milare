@@ -14,6 +14,7 @@ const AvailableGraphs = ({ canAddGraph }) => {
 	const [graphs, setGraphs] = useState([]);
 	const [error, setError] = useState(null);
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+	const [selectedGraph, setSelectedGraph] = useState({}); // to be passed to GraphForm
 
 	const fetchGraphs = () => {
 		const graphSummaries = getAllGraphs();
@@ -27,6 +28,11 @@ const AvailableGraphs = ({ canAddGraph }) => {
 		[] // only run this once when you start
 	);
 
+	const openGraphForm = (graph = {}) => {
+		setSelectedGraph(graph);
+		setDrawerIsOpen(true);
+	};
+
 	return (
 		<Fragment>
 			<div>
@@ -35,7 +41,10 @@ const AvailableGraphs = ({ canAddGraph }) => {
 					open={drawerIsOpen}
 					onClose={() => setDrawerIsOpen(false)}
 				>
-					<GraphForm graphData={{}} setDrawerIsOpen={setDrawerIsOpen} />
+					<GraphForm
+						graphData={selectedGraph}
+						setDrawerIsOpen={setDrawerIsOpen}
+					/>
 				</Drawer>
 				<div
 					style={{
@@ -50,7 +59,9 @@ const AvailableGraphs = ({ canAddGraph }) => {
 						startIcon={<AddCircleOutlineIcon />}
 						color="secondary"
 						variant="contained"
-						onClick={() => setDrawerIsOpen(true)}
+						onClick={() => {
+							openGraphForm();
+						}}
 					>
 						Add New Graph
 					</Button>
@@ -66,10 +77,14 @@ const AvailableGraphs = ({ canAddGraph }) => {
 				>
 					{graphs.map((graph) => (
 						<GraphCard
+							id={graph.id}
 							title={graph.title}
 							summary={graph.summary}
 							imageURL={graph.imageURL}
 							tags={graph.tags}
+							editGraphMetaData={() => {
+								openGraphForm(graph);
+							}}
 						/>
 					))}
 				</div>

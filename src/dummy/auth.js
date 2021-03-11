@@ -41,9 +41,9 @@ export const signup_DUMMY = (
  * dummy object to represent data base.
  */
 const user = {
-	chris: {
-		username: "chris",
-		password: "password",
+	c: {
+		username: "c",
+		password: "c",
 		isAdmin: true,
 		isDoctor: false,
 		isTranslator: false,

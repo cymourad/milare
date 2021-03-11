@@ -63,10 +63,10 @@ const LogIn = ({ userProfile, setUserProfile }) => {
 					label="Username"
 					value={username}
 					onChange={(event) => setUsername(event.target.value)}
-					style={{ margin: 50 }}
+					style={{ margin: 50, width: 300 }}
 				/>
 				<br />
-				<FormControl>
+				<FormControl style={{ width: 300 }}>
 					<InputLabel htmlFor="standard-adornment-password">
 						Password
 					</InputLabel>

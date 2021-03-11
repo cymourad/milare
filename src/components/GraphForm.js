@@ -11,7 +11,7 @@
  * -                      if not empty, it's an existing graph that will be edited and would have the following props
  * -- title     [string]
  * -- summary   [string]
- * -- tags      [object]  has property names as tag names and value as Boolean
+ * -- tags      [array of strings]
  * -- imageURL  [string]
  */
 
@@ -51,43 +51,43 @@ const GraphForm = ({ graphData, setDrawerIsOpen }) => {
 	};
 
 	return (
-		<form style={{ minWidth: 400, textAlign: "center" }}>
+		<form style={{ width: 500, textAlign: "center" }}>
 			<TextField
 				label="Title"
 				value={title}
 				onChange={(event) => {
 					setTitle(event.target.value);
 				}}
-				style={{ margin: 50 }}
+				style={{ margin: 50, width: "80%" }}
 			/>
 			<br />
 			<TextField
 				label="Summary"
 				multiline
-				rowsMax={4}
+				rows={6}
 				value={summary}
 				placeholder="Write a brief description of this scenario ..."
 				onChange={(event) => {
 					setSummary(event.target.value);
 				}}
+				style={{ width: "80%" }}
 			/>
 			<br />
 			<TextField
 				label="Image URL"
+				multiline
 				value={imageURL}
 				onChange={(event) => {
 					setImageURL(event.target.value);
 				}}
-				style={{ margin: 50 }}
+				style={{ margin: 50, width: "80%" }}
 			/>
 			<br />
-			<img src={imageURL} alt="image-preview" />
+			<img src={imageURL} alt="image-preview" style={{ maxWidth: "80%" }} />
 			<br />
 			<Button
 				variant="contained"
 				color="primary"
-				// className={classes.button}
-				// startIcon={<Edit />}
 				onClick={() => saveGraph()}
 				style={{ margin: 50 }}
 			>

@@ -9,9 +9,11 @@ import FRONT_END_ROUTE from "../resources/routes/frontEndRoutes";
 
 const NotFound = () => {
 	return (
-		<div>
+		<div style={{ textAlign: "center" }}>
 			<h1>Oops!</h1>
+			<br />
 			<p>Not too sure what you are looking for :/</p>
+			<br />
 			<p>
 				Try going to <Link to={FRONT_END_ROUTE.HOME}>our home page</Link>, maybe
 				you will find what you are looking for there ;)
