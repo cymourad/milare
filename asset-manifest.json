@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/milare/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/milare/static/js/main.f7c74e4c.chunk.js",
-    "main.js.map": "/milare/static/js/main.f7c74e4c.chunk.js.map",
+    "main.js": "/milare/static/js/main.2cda4ba8.chunk.js",
+    "main.js.map": "/milare/static/js/main.2cda4ba8.chunk.js.map",
     "runtime-main.js": "/milare/static/js/runtime-main.d811081c.js",
     "runtime-main.js.map": "/milare/static/js/runtime-main.d811081c.js.map",
     "static/js/2.694fa9dc.chunk.js": "/milare/static/js/2.694fa9dc.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.d811081c.js",
     "static/js/2.694fa9dc.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.f7c74e4c.chunk.js"
+    "static/js/main.2cda4ba8.chunk.js"
   ]
 }
