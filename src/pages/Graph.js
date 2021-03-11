@@ -5,11 +5,12 @@
  * When the user clicks on a node, they can open up a side meny to edit the text on it, or translate.
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Drawer from "@material-ui/core/Drawer";
 import ReactFlow, {
+	ReactFlowProvider,
 	removeElements,
 	addEdge,
 	MiniMap,
@@ -18,16 +19,17 @@ import ReactFlow, {
 } from "react-flow-renderer";
 
 import { getGraphWithID } from "../dummy/API";
+import InsertNodeSidebar from "../components/InsertNodeSidebar";
 
-const onLoad = (reactFlowInstance) => {
-	console.log("flow loaded:", reactFlowInstance);
-	reactFlowInstance.fitView();
-};
+let id = 10;
+const getId = () => `dndnode_${id++}`;
 
 const Graph = ({ canEdit, canTranslate }) => {
 	const location = useLocation();
-	console.log(location);
 	const [isLoading, setIsLoading] = useState(true);
+
+	const reactFlowWrapper = useRef(null);
+	const [reactFlowInstance, setReactFlowInstance] = useState(null);
 	const [elements, setElements] = useState([]);
 
 	const fetchGraphData = () => {
@@ -44,9 +46,41 @@ const Graph = ({ canEdit, canTranslate }) => {
 		[] // fetch graoh data only once when you first load the graph
 	);
 
+	const onGraphClick = (event) => console.log(event);
+
 	const onElementsRemove = (elementsToRemove) =>
 		setElements((els) => removeElements(elementsToRemove, els));
+
 	const onConnect = (params) => setElements((els) => addEdge(params, els));
+
+	const onLoad = (_reactFlowInstance) => {
+		setReactFlowInstance(_reactFlowInstance);
+		_reactFlowInstance.fitView(); // center graph on load TODO center the actual reactFlowInstance
+	};
+
+	const onDragOver = (event) => {
+		event.preventDefault();
+		event.dataTransfer.dropEffect = "move";
+	};
+
+	const onDrop = (event) => {
+		event.preventDefault();
+
+		const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
+		const type = event.dataTransfer.getData("application/reactflow");
+		const position = reactFlowInstance.project({
+			x: event.clientX - reactFlowBounds.left,
+			y: event.clientY - reactFlowBounds.top,
+		});
+		const newNode = {
+			id: getId(),
+			type,
+			position,
+			data: { label: `${type} node` },
+		};
+
+		setElements((es) => es.concat(newNode));
+	};
 
 	if (isLoading)
 		return (
@@ -57,34 +91,43 @@ const Graph = ({ canEdit, canTranslate }) => {
 
 	return (
 		<div style={{ display: "flex", height: "90vh" }}>
-			<ReactFlow
-				elements={elements}
-				onElementsRemove={onElementsRemove}
-				onConnect={onConnect}
-				onLoad={onLoad}
-				snapToGrid={true}
-				snapGrid={[15, 15]}
-				deleteKeyCode={46} /* delete-key */
-			>
-				<MiniMap
-					nodeStrokeColor={(n) => {
-						if (n.style?.background) return n.style.background;
-						if (n.type === "input") return "#0041d0";
-						if (n.type === "output") return "#ff0072";
-						if (n.type === "default") return "#1a192b";
+			<ReactFlowProvider>
+				<div style={{ width: "80%" }} ref={reactFlowWrapper}>
+					<ReactFlow
+						elements={elements}
+						onElementsRemove={onElementsRemove}
+						onConnect={onConnect}
+						onLoad={onLoad}
+						onClick={onGraphClick}
+						onDrop={onDrop}
+						onDragOver={onDragOver}
+						snapToGrid={true}
+						snapGrid={[15, 15]}
+						deleteKeyCode={46} /* delete-key */
+						nodesConnectable={canEdit}
+					>
+						<MiniMap
+							nodeStrokeColor={(n) => {
+								if (n.style?.background) return n.style.background;
+								if (n.type === "input") return "#0041d0";
+								if (n.type === "output") return "#ff0072";
+								if (n.type === "default") return "#1a192b";
 
-						return "#eee";
-					}}
-					nodeColor={(n) => {
-						if (n.style?.background) return n.style.background;
+								return "#eee";
+							}}
+							nodeColor={(n) => {
+								if (n.style?.background) return n.style.background;
 
-						return "#fff";
-					}}
-					nodeBorderRadius={2}
-				/>
-				<Controls />
-				<Background color="#aaa" gap={16} />
-			</ReactFlow>
+								return "#fff";
+							}}
+							nodeBorderRadius={2}
+						/>
+						<Controls />
+						<Background color="#aaa" gap={16} />
+					</ReactFlow>
+				</div>
+				<InsertNodeSidebar />
+			</ReactFlowProvider>
 		</div>
 	);
 };
