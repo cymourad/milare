@@ -36,6 +36,7 @@ const GraphCard = ({
 	imageURL,
 	summary,
 	editGraphMetaData,
+	canEdit,
 }) => {
 	const classes = useStyles();
 
@@ -73,12 +74,14 @@ const GraphCard = ({
 					style={{ textDecoration: "none" }}
 				>
 					<Button size="small" color="primary">
-						Edit Graph
+						{canEdit ? "Edit Graph" : "Translate"}
 					</Button>
 				</Link>
-				<Button size="small" color="primary" onClick={editGraphMetaData}>
-					Edit Meta-data
-				</Button>
+				{canEdit && (
+					<Button size="small" color="primary" onClick={editGraphMetaData}>
+						Edit Meta-data
+					</Button>
+				)}
 			</CardActions>
 		</Card>
 	);

@@ -41,13 +41,15 @@ const TranslateForm = ({
 	if (isLoading) return <CircularProgress />;
 
 	return (
-		<div style={{ textAlign: "center", margin: 40 }}>
-			<Typography>{englishText}</Typography>
+		<div style={{ margin: 20 }}>
+			<Typography variant="body2">Please translate the following: </Typography>
+			<Typography style={{ margin: 10 }}>" {englishText} "</Typography>
 			<TextField
 				value={translation}
 				label={"Translation in " + translationLanguage}
 				onChange={(event) => setTranslation(event.target.value)}
 			/>
+			<br />
 			{error}
 			<Button
 				variant="contained"

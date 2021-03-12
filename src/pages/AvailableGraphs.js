@@ -64,7 +64,7 @@ const AvailableGraphs = ({ canAddGraph }) => {
 								openGraphForm();
 							}}
 						>
-							Add New Graph
+							Add New Chief Complaint
 						</Button>
 					</div>
 				)}
@@ -87,6 +87,7 @@ const AvailableGraphs = ({ canAddGraph }) => {
 							editGraphMetaData={() => {
 								openGraphForm(graph);
 							}}
+							canEdit={canAddGraph}
 						/>
 					))}
 				</div>
