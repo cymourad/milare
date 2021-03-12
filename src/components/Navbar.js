@@ -50,12 +50,20 @@ const Navbar = ({ isLoggedIn, logout }) => {
 							</Button>
 						</>
 					) : (
-						<Link
-							to={FRONT_END_ROUTE.LOGIN}
-							style={{ textDecoration: "none", color: "white" }}
-						>
-							<Button color="inherit">Login</Button>
-						</Link>
+						<div>
+							<Link
+								to={FRONT_END_ROUTE.SIGN_UP}
+								style={{ textDecoration: "none", color: "white" }}
+							>
+								<Button color="inherit">Sign Up</Button>
+							</Link>
+							<Link
+								to={FRONT_END_ROUTE.LOGIN}
+								style={{ textDecoration: "none", color: "white" }}
+							>
+								<Button color="inherit">Login</Button>
+							</Link>
+						</div>
 					)}
 				</Toolbar>
 			</AppBar>

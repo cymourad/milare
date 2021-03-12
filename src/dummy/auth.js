@@ -68,6 +68,7 @@ const user = {
 		isAdmin: false,
 		isDoctor: false,
 		isTranslator: true,
+		language: "French",
 	},
 };
 

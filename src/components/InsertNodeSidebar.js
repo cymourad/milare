@@ -1,13 +1,18 @@
+/**
+ * This menu goes in the Sidebar for a graph.
+ * It allows a user to drag a new node into the graph
+ */
+
 import React from "react";
 
-export default () => {
+const InsertNodeSidebar = () => {
 	const onDragStart = (event, nodeType) => {
 		event.dataTransfer.setData("application/reactflow", nodeType);
 		event.dataTransfer.effectAllowed = "move";
 	};
 
 	return (
-		<aside>
+		<div>
 			<div style={{ margin: 20 }}>
 				You can drag these nodes to the pane on the right.
 			</div>
@@ -50,6 +55,8 @@ export default () => {
 			>
 				Final Answer
 			</div>
-		</aside>
+		</div>
 	);
 };
+
+export default InsertNodeSidebar;

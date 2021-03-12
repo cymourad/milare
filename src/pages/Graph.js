@@ -8,7 +8,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Drawer from "@material-ui/core/Drawer";
 import ReactFlow, {
 	ReactFlowProvider,
 	removeElements,
@@ -19,18 +18,20 @@ import ReactFlow, {
 } from "react-flow-renderer";
 
 import { getGraphWithID } from "../dummy/API";
-import InsertNodeSidebar from "../components/InsertNodeSidebar";
+import GraphSidebar from "../components/GraphSidebar";
 
 let id = 10;
 const getId = () => `dndnode_${id++}`;
 
-const Graph = ({ canEdit, canTranslate }) => {
+const Graph = ({ canEdit, canTranslate, isAdmin, translationLanguage }) => {
 	const location = useLocation();
 	const [isLoading, setIsLoading] = useState(true);
 
 	const reactFlowWrapper = useRef(null);
 	const [reactFlowInstance, setReactFlowInstance] = useState(null);
 	const [elements, setElements] = useState([]);
+
+	const [selectedNode, setSelectedNode] = useState(null);
 
 	const fetchGraphData = () => {
 		const graphData = getGraphWithID(location.state.id);
@@ -46,7 +47,10 @@ const Graph = ({ canEdit, canTranslate }) => {
 		[] // fetch graoh data only once when you first load the graph
 	);
 
-	const onGraphClick = (event) => console.log(event);
+	const onElementClick = (event, element) => {
+		console.log(element);
+		setSelectedNode(element);
+	};
 
 	const onElementsRemove = (elementsToRemove) =>
 		setElements((els) => removeElements(elementsToRemove, els));
@@ -98,13 +102,13 @@ const Graph = ({ canEdit, canTranslate }) => {
 						onElementsRemove={onElementsRemove}
 						onConnect={onConnect}
 						onLoad={onLoad}
-						onClick={onGraphClick}
 						onDrop={onDrop}
 						onDragOver={onDragOver}
 						snapToGrid={true}
 						snapGrid={[15, 15]}
 						deleteKeyCode={46} /* delete-key */
 						nodesConnectable={canEdit}
+						onElementClick={onElementClick}
 					>
 						<MiniMap
 							nodeStrokeColor={(n) => {
@@ -126,7 +130,14 @@ const Graph = ({ canEdit, canTranslate }) => {
 						<Background color="#aaa" gap={16} />
 					</ReactFlow>
 				</div>
-				<InsertNodeSidebar />
+				<GraphSidebar
+					canEdit={canEdit}
+					canTranslate={canTranslate}
+					isAdmin={isAdmin}
+					selectedNode={selectedNode}
+					chiefComplaintID={location.state.id}
+					translationLanguage={translationLanguage}
+				/>
 			</ReactFlowProvider>
 		</div>
 	);

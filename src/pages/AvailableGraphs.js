@@ -46,26 +46,28 @@ const AvailableGraphs = ({ canAddGraph }) => {
 						setDrawerIsOpen={setDrawerIsOpen}
 					/>
 				</Drawer>
-				<div
-					style={{
-						marginTop: 30,
-						display: "flex",
-						flexWrap: "wrap",
-						flexDirection: "row",
-						justifyContent: "center",
-					}}
-				>
-					<Button
-						startIcon={<AddCircleOutlineIcon />}
-						color="secondary"
-						variant="contained"
-						onClick={() => {
-							openGraphForm();
+				{canAddGraph && (
+					<div
+						style={{
+							marginTop: 30,
+							display: "flex",
+							flexWrap: "wrap",
+							flexDirection: "row",
+							justifyContent: "center",
 						}}
 					>
-						Add New Graph
-					</Button>
-				</div>
+						<Button
+							startIcon={<AddCircleOutlineIcon />}
+							color="secondary"
+							variant="contained"
+							onClick={() => {
+								openGraphForm();
+							}}
+						>
+							Add New Graph
+						</Button>
+					</div>
+				)}
 
 				<div
 					style={{

@@ -40,6 +40,7 @@ const LogIn = ({ userProfile, setUserProfile }) => {
 			isAdmin: userData.isAdmin,
 			isDoctor: userData.isDoctor,
 			isTranslator: userData.isTranslator,
+			language: userData.isTranslator ? userData.language : "",
 		});
 	};
 
@@ -63,7 +64,7 @@ const LogIn = ({ userProfile, setUserProfile }) => {
 					label="Username"
 					value={username}
 					onChange={(event) => setUsername(event.target.value)}
-					style={{ margin: 50, width: 300 }}
+					style={{ margin: 50, marginTop: 20, width: 300 }}
 				/>
 				<br />
 				<FormControl style={{ width: 300 }}>
@@ -89,7 +90,12 @@ const LogIn = ({ userProfile, setUserProfile }) => {
 					/>
 				</FormControl>
 				<br />
-				<Button style={{ margin: 50 }} onClick={() => login()}>
+				<Button
+					style={{ margin: 50 }}
+					onClick={login}
+					variant="contained"
+					color="primary"
+				>
 					Login
 				</Button>
 			</form>

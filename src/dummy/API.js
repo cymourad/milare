@@ -6,6 +6,10 @@ export const getAllGraphs = () => {
 	return GRAPHS;
 };
 
+export const getGrapTagsForID = (id) => {
+	return GRAPHS[id].questionTags;
+};
+
 export const addNewGraph = (title, summary, imageURL, tags = []) => {
 	graphIDcounter++;
 
@@ -53,6 +57,11 @@ const GRAPHS = [
 		imageURL:
 			"https://cornerstonephysio.com/wp-content/uploads/2019/07/back-pain.jpg",
 		tags: [TAG.CHRONIC],
+		questionTags: [
+			{ id: 1, tag: "Q" },
+			{ id: 2, tag: "R" },
+			{ id: 3, tag: "S" },
+		],
 	},
 	{
 		id: 2,
@@ -62,6 +71,11 @@ const GRAPHS = [
 		imageURL:
 			"https://health.clevelandclinic.org/wp-content/uploads/sites/3/2019/02/bodyHappenFever-1006577818-770x553.jpg",
 		tags: [TAG.CHILDREN, TAG.SEASONAL],
+		questionTags: [
+			{ id: 1, tag: "Q" },
+			{ id: 2, tag: "R" },
+			{ id: 3, tag: "S" },
+		],
 	},
 	{
 		id: 3,
@@ -71,6 +85,11 @@ const GRAPHS = [
 		imageURL:
 			"https://www.clevelandclinic.org/healthinfo/ShowImage.ashx?PIC=4486",
 		tags: [TAG.SEASONAL],
+		questionTags: [
+			{ id: 1, tag: "Q" },
+			{ id: 2, tag: "R" },
+			{ id: 3, tag: "S" },
+		],
 	},
 ];
 
@@ -85,32 +104,57 @@ const nodesAndLinksForGraph = {
 		{
 			id: "1",
 			type: "input", // input node
-			data: { label: "Back Pain" },
+			data: {
+				label: "Back Pain",
+				isQuestion: false,
+				translation: "comment ca va?",
+				tags: [],
+			},
 			position: { x: 350, y: 25 },
 		},
 		// default node
 		{
 			id: "2",
 			// you can also pass a React component as a label
-			data: { label: <div>First Question</div> },
+			data: {
+				label: "First Question",
+				isQuestion: true,
+				translation: "comment ca va?",
+				tags: [1],
+			},
 			position: { x: 50, y: 125 },
 		},
 		{
 			id: "3",
 			// you can also pass a React component as a label
-			data: { label: <div>Second Question</div> },
+			data: {
+				label: "Second Question",
+				isQuestion: true,
+				translation: "comment ca va?",
+				tags: [2],
+			},
 			position: { x: 350, y: 125 },
 		},
 		{
 			id: "4",
 			// you can also pass a React component as a label
-			data: { label: <div>Third Question</div> },
+			data: {
+				label: "Third Question",
+				isQuestion: true,
+				translation: "comment ca va?",
+				tags: [3],
+			},
 			position: { x: 650, y: 125 },
 		},
 		{
 			id: "5",
 			type: "output", // output node
-			data: { label: "Final Asnwer" },
+			data: {
+				label: "Final Asnwer",
+				isQuestion: false,
+				translation: "comment ca va?",
+				tags: [],
+			},
 			position: { x: 250, y: 250 },
 		},
 		// animated edge

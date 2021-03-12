@@ -13,6 +13,7 @@ import FRONT_END_ROUTE from "./resources/routes/frontEndRoutes";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
+import SignUp from "./pages/SignUp";
 import AvailableGraphs from "./pages/AvailableGraphs";
 import Graph from "./pages/Graph";
 import NotFound from "./pages/NotFound";
@@ -44,6 +45,9 @@ function App() {
 					<Route exact path={FRONT_END_ROUTE.LOGIN}>
 						<LogIn setUserProfile={setUserProfile} userProfile={userProfile} />
 					</Route>
+					<Route exact path={FRONT_END_ROUTE.SIGN_UP}>
+						<SignUp setUserProfile={setUserProfile} isLoggedIn={isLoggedIn()} />
+					</Route>
 					{/* <Route exact path={FRONT_END_ROUTE.AVAILABLE_GRAPHS}>
 						<AvailableGraphs
 							canAddGraph={userProfile.isAdmin || userProfile.isDoctor}
@@ -68,7 +72,11 @@ function App() {
 						{isLoggedIn() ? (
 							<Graph
 								canEdit={userProfile.isDoctor || userProfile.isAdmin}
-								canTranslate={userProfile.isTranslator || userProfile.isAdmin}
+								canTranslate={userProfile.isTranslator}
+								isAdmin={userProfile.isAdmin}
+								translationLanguage={
+									userProfile.isTranslator ? userProfile.language : null
+								}
 							/>
 						) : (
 							<Redirect to={FRONT_END_ROUTE.LOGIN} />
